@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { HeartPulse, Bed } from 'lucide-react'; // Added for Health Metrics and Sleep Tracker
+import { HeartPulse, Bed, Droplet } from 'lucide-react'; // Added for Health Metrics, Sleep Tracker, and Hydration Tracker
 
 const Sidebar = () => {
   return (
@@ -29,6 +29,12 @@ const Sidebar = () => {
             <Link href="/dashboard/sleep-tracker" className="flex items-center space-x-3 py-2.5 px-4 rounded-md transition-colors duration-200 hover:bg-accent hover:text-accent-foreground text-muted-foreground">
               <Bed className="h-5 w-5" />
               <span>Sleep Tracker</span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/dashboard/hydration-tracker" className="flex items-center space-x-3 py-2.5 px-4 rounded-md transition-colors duration-200 hover:bg-accent hover:text-accent-foreground text-muted-foreground">
+              <Droplet className="h-5 w-5" />
+              <span>Hydration Tracker</span>
             </Link>
           </li>
           <li>
