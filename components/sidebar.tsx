@@ -86,15 +86,7 @@ const Sidebar = () => {
               <span>Reports</span>
             </Link>
           </li>
-          <li>
-            <Link
-              href="/dashboard/profile"
-              className="flex items-center space-x-3 py-2.5 px-4 rounded-md transition-colors duration-200 hover:bg-accent hover:text-accent-foreground text-muted-foreground"
-            >
-              <User className="h-5 w-5" />
-              <span>Profile</span>
-            </Link>
-          </li>
+          {/* Profile link removed as per request */}
           <li>
             <Link
               href="/dashboard/settings"

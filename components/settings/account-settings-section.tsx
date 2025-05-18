@@ -1,23 +1,37 @@
-import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { User } from 'lucide-react'; // Placeholder icon
+import React from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
+import { User } from "lucide-react"; // Placeholder icon
 
-const AccountSettingsSection = React.forwardRef<HTMLDivElement>((props, ref) => {
+const AccountSettingsSection = React.forwardRef<
+  HTMLDivElement
+>((props, ref) => {
   // Mock data for placeholders - in a real app, this would come from state/API
   const userData = {
-    name: 'Alex Johnson',
-    email: 'alex.johnson@example.com',
-    phone: '+1 (555) 123-4567',
-    dob: '1990-05-15', // Use YYYY-MM-DD for date input value
-    gender: 'male',
-    height: '175',
-    weight: '70',
-    avatarUrl: '', // Replace with actual URL if available
+    name: "Lalit Vavdara",
+    email: "lalit.vd.dev@gmail.com",
+    phone: "+1 (555) 123-4567",
+    dob: "1990-05-15", // Use YYYY-MM-DD for date input value
+    gender: "male",
+    height: "175",
+    weight: "70",
+    avatarUrl: "https://avatar.iran.liara.run/public/boy"
   };
 
   return (
@@ -70,7 +84,9 @@ const AccountSettingsSection = React.forwardRef<HTMLDivElement>((props, ref) => 
                 <SelectItem value="male">Male</SelectItem>
                 <SelectItem value="female">Female</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
-                <SelectItem value="prefer_not_to_say">Prefer not to say</SelectItem>
+                <SelectItem value="prefer_not_to_say">
+                  Prefer not to say
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -92,5 +108,5 @@ const AccountSettingsSection = React.forwardRef<HTMLDivElement>((props, ref) => 
   );
 });
 
-AccountSettingsSection.displayName = 'AccountSettingsSection';
+AccountSettingsSection.displayName = "AccountSettingsSection";
 export default AccountSettingsSection;
