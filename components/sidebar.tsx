@@ -6,7 +6,10 @@ import {
   Droplet,
   Dumbbell,
   Smile,
-  LayoutDashboard
+  LayoutDashboard,
+  BarChart3,
+  User,
+  Settings
 } from "lucide-react"; // Added for Health Metrics, Sleep Tracker, Hydration Tracker, Fitness Log, and Mood Journal
 
 const Sidebar = () => {
@@ -76,10 +79,19 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
+              href="/dashboard/reports"
+              className="flex items-center space-x-3 py-2.5 px-4 rounded-md transition-colors duration-200 hover:bg-accent hover:text-accent-foreground text-muted-foreground"
+            >
+              <BarChart3 className="h-5 w-5" />
+              <span>Reports</span>
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/dashboard/profile"
               className="flex items-center space-x-3 py-2.5 px-4 rounded-md transition-colors duration-200 hover:bg-accent hover:text-accent-foreground text-muted-foreground"
             >
-              {/* <User className="h-5 w-5" /> */}
+              <User className="h-5 w-5" />
               <span>Profile</span>
             </Link>
           </li>
@@ -88,7 +100,7 @@ const Sidebar = () => {
               href="/dashboard/settings"
               className="flex items-center space-x-3 py-2.5 px-4 rounded-md transition-colors duration-200 hover:bg-accent hover:text-accent-foreground text-muted-foreground"
             >
-              {/* <Settings className="h-5 w-5" /> */}
+              <Settings className="h-5 w-5" />
               <span>Settings</span>
             </Link>
           </li>
