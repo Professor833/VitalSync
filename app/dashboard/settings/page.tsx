@@ -1,93 +1,114 @@
 "use client";
 
-import * as React from "react";
-import { useTheme } from "next-themes";
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import SettingsNav, { SettingsSection } from '@/components/settings/settings-nav';
+import AccountSettingsSection from '@/components/settings/account-settings-section';
+import NotificationSettingsSection from '@/components/settings/notification-settings-section';
+import AppearanceSettingsSection from '@/components/settings/appearance-settings-section';
+import HealthGoalsSettingsSection from '@/components/settings/health-goals-settings-section';
+import PrivacyDataSettingsSection from '@/components/settings/privacy-data-settings-section';
+import IntegrationsSettingsSection from '@/components/settings/integrations-settings-section';
+import { UserCircle, Bell, Palette, Heart, ShieldCheck, Puzzle, Upload, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+const settingsSectionsConfig: SettingsSection[] = [
+  { id: 'account', title: 'Account', icon: UserCircle },
+  { id: 'notifications', title: 'Notifications', icon: Bell },
+  { id: 'appearance', title: 'Appearance', icon: Palette },
+  { id: 'health-goals', title: 'Health Goals', icon: Heart },
+  { id: 'privacy-data', title: 'Privacy & Data', icon: ShieldCheck },
+  { id: 'integrations', title: 'Integrations', icon: Puzzle },
+];
+
+const sectionComponents: { [key: string]: React.FC<any> } = {
+  account: AccountSettingsSection,
+  notifications: NotificationSettingsSection,
+  appearance: AppearanceSettingsSection,
+  'health-goals': HealthGoalsSettingsSection,
+  'privacy-data': PrivacyDataSettingsSection,
+  integrations: IntegrationsSettingsSection,
+};
 
 export default function SettingsPage() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  const [activeSection, setActiveSection] = useState<string>(settingsSectionsConfig[0].id);
+  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  if (!mounted) {
-    return null;
-  }
+  const handleNavigate = useCallback((sectionId: string) => {
+    setActiveSection(sectionId);
+    sectionRefs.current[sectionId]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, []);
+
+  const observerCallback = useCallback((entries: IntersectionObserverEntry[]) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        setActiveSection(entry.target.id);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const observerOptions = {
+      rootMargin: '-20% 0px -80% 0px', // Trigger when section is roughly in the middle of the viewport
+      threshold: 0.4, // How much of the element should be visible
+    };
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    Object.values(sectionRefs.current).forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      Object.values(sectionRefs.current).forEach(ref => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, [observerCallback]);
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-semibold text-foreground">Settings</h1>
+    <div className="container mx-auto py-8 px-4 md:px-6 lg:px-8">
+      <div className="mb-8 flex flex-col sm:flex-row justify-between sm:items-center">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+          <p className="text-muted-foreground mt-1">
+            Customize your VitalSync experience.
+          </p>
+        </div>
+        <div className="mt-4 sm:mt-0 flex space-x-2">
+          <Button variant="outline">
+            <Upload className="mr-2 h-4 w-4" />
+            Export My Data
+          </Button>
+          <Button variant="destructive">
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete My Data
+          </Button>
+        </div>
+      </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Notification Settings</CardTitle>
-          <CardDescription>Manage how you receive notifications.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="flex items-center justify-between space-x-2 p-4 rounded-md border">
-            <Label htmlFor="emailNotifications" className="flex flex-col space-y-1">
-              <span>Email Notifications</span>
-              <span className="font-normal leading-snug text-muted-foreground">
-                Receive updates and alerts via email.
-              </span>
-            </Label>
-            <Switch id="emailNotifications" defaultChecked />
-          </div>
-          <div className="flex items-center justify-between space-x-2 p-4 rounded-md border">
-            <Label htmlFor="pushNotifications" className="flex flex-col space-y-1">
-              <span>Push Notifications</span>
-              <span className="font-normal leading-snug text-muted-foreground">
-                Get real-time alerts on your devices.
-              </span>
-            </Label>
-            <Switch id="pushNotifications" />
-          </div>
-          <div className="flex items-center justify-between space-x-2 p-4 rounded-md border">
-            <Label htmlFor="weeklySummary" className="flex flex-col space-y-1">
-              <span>Weekly Summary Email</span>
-              <span className="font-normal leading-snug text-muted-foreground">
-                Get a summary of your activity every week.
-              </span>
-            </Label>
-            <Switch id="weeklySummary" defaultChecked />
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button>Save Notification Preferences</Button>
-        </CardFooter>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+        <div className="lg:col-span-1 lg:sticky lg:top-20 h-full">
+          <SettingsNav
+            sections={settingsSectionsConfig}
+            activeSection={activeSection}
+            onNavigate={handleNavigate}
+          />
+        </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Appearance Settings</CardTitle>
-          <CardDescription>Customize the look and feel of the application.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="theme">Theme</Label>
-            <Select value={theme} onValueChange={setTheme}>
-              <SelectTrigger id="theme">
-                <SelectValue placeholder="Select theme" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
-              </SelectContent>
-            </Select>
-            <p className="text-sm text-muted-foreground">
-              Choose how VitalSync looks on your device.
-            </p>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button>Save Appearance Settings</Button>
-        </CardFooter>
-      </Card>
+        <main className="lg:col-span-3 space-y-8">
+          {settingsSectionsConfig.map(section => {
+            const Component = sectionComponents[section.id];
+            return (
+              <Component
+                key={section.id}
+                ref={(el: HTMLDivElement | null) => sectionRefs.current[section.id] = el}
+              />
+            );
+          })}
+        </main>
+      </div>
     </div>
   );
 }
