@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, BarChart3, ShieldCheck, Zap } from 'lucide-react'; // Example icons
+import { ArrowRight, BarChart3, ShieldCheck, Zap, Github, Linkedin } from 'lucide-react'; // Example icons
 import ParticlesBackground from '@/components/landing/ParticlesBackground'; // Add this import
 
 export default function LandingPage() {
@@ -50,8 +50,8 @@ export default function LandingPage() {
                   Get Started <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-sky-500 text-sky-500 hover:bg-sky-500/10 hover:text-sky-400">
-                Learn More
+              <Button size="lg" variant="outline" className="border-sky-500 text-sky-500 hover:bg-sky-500/10 hover:text-sky-400" asChild>
+                <Link href="#features">Learn More</Link>
               </Button>
             </div>
           </div>
@@ -80,6 +80,17 @@ export default function LandingPage() {
                 description="Your health data is encrypted and protected, ensuring your privacy and security are paramount."
               />
             </div>
+
+            {/* Added Side Note Section */}
+            <div className="mt-16 pt-8 border-t border-slate-700/50 text-center">
+              <h3 className="text-2xl font-semibold text-sky-400 mb-4">A Note on VitalSync</h3>
+              <p className="text-slate-300 max-w-3xl mx-auto mb-4">
+                Currently, all data displayed within the dashboard is for visual and demonstrative purposes only. We are actively working towards full integration capabilities.
+              </p>
+              <p className="text-slate-300 max-w-3xl mx-auto">
+                In today's world, many of us use a variety of health and fitness wearables from different providers. VitalSync addresses the growing need for a centralized platform where you can consolidate, view, and analyze all your health data in one secure place, regardless of its source. Our goal is to empower you with a holistic understanding of your well-being.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -105,6 +116,17 @@ export default function LandingPage() {
             <Link href="/privacy" className="ml-2 hover:text-sky-400 transition-colors">Privacy Policy</Link> |
             <Link href="/terms" className="ml-1 hover:text-sky-400 transition-colors">Terms of Service</Link>
           </p>
+          <p className="text-sm text-slate-400 mt-4">
+            Made with <span role="img" aria-label="love">❤️</span> and passion for Health Tech by Lalit V.
+          </p>
+          <div className="mt-4 flex justify-center space-x-4">
+            <Link href="https://github.com/Professor833" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-sky-400 transition-colors">
+              <Github className="h-6 w-6" />
+            </Link>
+            <Link href="https://www.linkedin.com/in/lalit-vavdara/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-sky-400 transition-colors">
+              <Linkedin className="h-6 w-6" />
+            </Link>
+          </div>
         </div>
       </footer>
     </div>
