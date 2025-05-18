@@ -20,13 +20,13 @@ const settingsSectionsConfig: SettingsSection[] = [
   { id: 'integrations', title: 'Integrations', icon: Puzzle },
 ];
 
-const sectionComponents: { [key: string]: React.FC<any> } = {
-  account: AccountSettingsSection,
-  notifications: NotificationSettingsSection,
-  appearance: AppearanceSettingsSection,
+const sectionComponents: Record<string, React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>> = {
+  'account': AccountSettingsSection,
+  'notifications': NotificationSettingsSection,
+  'appearance': AppearanceSettingsSection,
   'health-goals': HealthGoalsSettingsSection,
   'privacy-data': PrivacyDataSettingsSection,
-  integrations: IntegrationsSettingsSection,
+  'integrations': IntegrationsSettingsSection,
 };
 
 export default function SettingsPage() {
@@ -103,7 +103,7 @@ export default function SettingsPage() {
             return (
               <Component
                 key={section.id}
-                ref={(el: HTMLDivElement | null) => sectionRefs.current[section.id] = el}
+                ref={(el: HTMLDivElement | null) => { sectionRefs.current[section.id] = el; }}
               />
             );
           })}
