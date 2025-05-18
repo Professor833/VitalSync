@@ -29,9 +29,13 @@ VitalSync is a modern, user-friendly web application designed to help you monito
   * Visualize trends for various health metrics.
 * **Activity Tracking:**
   * (Placeholder for weekly activity chart).
-* **User Profile & Settings:**
-  * (Placeholders for user profile management and application settings).
-* **Theme Customization:** Switch between Light and Dark modes for comfortable viewing. (Currently experiencing a minor theme application inconsistency being addressed).
+* **Comprehensive Settings Page:**
+  * **Appearance:** Customize theme (Light, Dark, System) and application font.
+  * **Notifications:** Configure preferences for email and push notifications, and set a notification schedule (UI for demonstration, no backend).
+  * **Account Management:** Mock forms for updating profile information and changing passwords.
+  * **Data & Privacy:** Mock forms for managing data and privacy settings.
+  * **Help & Support:** Mock UI for accessing help resources.
+* **Theme Customization:** Easily switch between Light, Dark, and System themes for optimal viewing comfort. Includes font selection for further personalization.
 * **Responsive Design:** Access your health data seamlessly across devices.
 
 ## Tech Stack
@@ -61,26 +65,26 @@ Follow these instructions to get a local copy up and running.
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/Professor833/VitalSync.git
-cd VitalSync
-```
+   ```bash
+   git clone https://github.com/Professor833/VitalSync.git
+   cd VitalSync
+   ```
 
 2. Install dependencies:
 
-```bash
-npm install
-# or
-# yarn install
-```
+   ```bash
+   npm install
+   # or
+   # yarn install
+   ```
 
 3. Run the development server:
 
-```bash
-npm run dev
-# or
-# yarn dev
-```
+   ```bash
+   npm run dev
+   # or
+   # yarn dev
+   ```
 
    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
