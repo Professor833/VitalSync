@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
 import { Sun, Moon, Laptop, Palette as PaletteIcon, LayoutGrid, ListFilter, Check, TextIcon } from 'lucide-react';
@@ -31,6 +32,7 @@ const initialAppearanceSettings = {
 const AppearanceSettingsSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const scrollPositionRef = useRef<number | null>(null);
 
   const [selectedColorScheme, setSelectedColorScheme] = useState(initialAppearanceSettings.colorScheme);
   const [selectedLayout, setSelectedLayout] = useState(initialAppearanceSettings.dashboardLayout);
@@ -41,9 +43,28 @@ const AppearanceSettingsSection = React.forwardRef<HTMLDivElement>((props, ref) 
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    // This effect runs when the theme changes.
+    // If we have a stored scroll position, restore it and body overflow.
+    if (mounted && scrollPositionRef.current !== null) {
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollPositionRef.current!);
+        document.body.style.overflow = ''; // Restore body overflow
+        scrollPositionRef.current = null; // Reset after restoring
+      });
+    }
+  }, [theme, mounted]); // Depend on theme and mounted state
+
+  const handleThemeChange = (newThemeValue: string) => {
+    scrollPositionRef.current = window.scrollY; // Store scroll position before theme change
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+    setTheme(newThemeValue);
+  };
+
   const handleResetToDefault = () => {
-    // For theme, 'system' is often the default with next-themes
-    setTheme('system'); 
+    scrollPositionRef.current = window.scrollY; // Store scroll position
+    document.body.style.overflow = 'hidden'; // Disable body scroll
+    setTheme('system');
     setSelectedColorScheme(initialAppearanceSettings.colorScheme);
     setSelectedLayout(initialAppearanceSettings.dashboardLayout);
     setTextSize([initialAppearanceSettings.textSize]);
@@ -67,33 +88,29 @@ const AppearanceSettingsSection = React.forwardRef<HTMLDivElement>((props, ref) 
       <CardContent className="space-y-8">
         {/* Theme Section */}
         <div className="space-y-3">
-          <Label className="text-base font-semibold">Theme</Label>
-          <RadioGroup value={theme} onValueChange={setTheme} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[ 
-              { value: 'light', label: 'Light', description: 'Light background with dark text', icon: Sun },
-              { value: 'dark', label: 'Dark', description: 'Dark background with light text', icon: Moon },
-              { value: 'system', label: 'System', description: 'Follow system preferences', icon: Laptop },
-            ].map((item) => (
-              <Label
-                key={item.value}
-                htmlFor={`theme-${item.value}`}
-                className={cn(
-                  'flex flex-col items-start p-4 rounded-lg border cursor-pointer transition-colors',
-                  theme === item.value ? 'border-primary ring-2 ring-primary' : 'border-muted'
-                )}
-              >
-                <RadioGroupItem value={item.value} id={`theme-${item.value}`} className="sr-only" />
-                <div className="flex items-center justify-between w-full mb-2">
-                  <div className="flex items-center">
-                    <item.icon className="h-5 w-5 mr-2 text-muted-foreground" />
-                    <span className="font-medium">{item.label}</span>
-                  </div>
-                  {theme === item.value && <Check className="h-5 w-5 text-primary" />}
+          <Label className="text-base font-semibold" htmlFor="theme-select">Theme</Label>
+          <Select value={theme} onValueChange={handleThemeChange}>
+            <SelectTrigger id="theme-select" className="w-full sm:w-[280px]">
+              <SelectValue placeholder="Select theme" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">
+                <div className="flex items-center">
+                  <Sun className="h-4 w-4 mr-2" /> Light
                 </div>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </Label>
-            ))}
-          </RadioGroup>
+              </SelectItem>
+              <SelectItem value="dark">
+                <div className="flex items-center">
+                  <Moon className="h-4 w-4 mr-2" /> Dark
+                </div>
+              </SelectItem>
+              <SelectItem value="system">
+                <div className="flex items-center">
+                  <Laptop className="h-4 w-4 mr-2" /> System
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <Separator />
