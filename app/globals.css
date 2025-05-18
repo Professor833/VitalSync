@@ -85,8 +85,13 @@
   * {
     @apply border-border;
   }
+  html { /* Ensure html tag also gets the dark background */
+    @apply bg-background;
+    background-color: #0f172a !important; /* slate-900, temporary debug */
+  }
   body {
     @apply bg-background text-foreground;
+    background-color: #0f172a !important; /* slate-900, temporary debug */
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -117,3 +122,30 @@
   display: none !important;            
 }
 */
+
+/* Gradient Animation for Hero Section Text */
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.animated-gradient-text {
+  background-image: linear-gradient(
+    to right,
+    #7928CA 0%, /* Purple */
+    #FF0080 50%, /* Magenta/Pink */
+    #007CF0 75%, /* Blue */
+    #7928CA 100% /* Purple again for smooth loop */
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-x 4s ease infinite; /* Adjusted speed and timing function */
+  background-size: 300% 300%; /* Larger size for smoother transition with more colors */
+}
