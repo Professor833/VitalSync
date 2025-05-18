@@ -2,6 +2,8 @@
 
 VitalSync is a modern, user-friendly web application designed to help you monitor and manage various aspects of your health and wellness. It features an engaging landing page and a detailed dashboard for tracking metrics from sleep patterns to vital health statistics.
 
+Live Link: [VitalSync](https://vitalsync-kappa.vercel.app)
+
 ## Features
 
 * **Dynamic Landing Page:**
