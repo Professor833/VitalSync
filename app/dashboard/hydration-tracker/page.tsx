@@ -73,7 +73,7 @@ export default function HydrationTrackerPage() {
 
       {/* Today's Hydration Overview */}
       <section>
-        <h2 className="text-xl sm:text-2xl font-semibold mb-4">Today's Hydration</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold mb-4">Today&apos;s Hydration</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <Card>
             <CardHeader className="pb-2">
@@ -126,7 +126,7 @@ export default function HydrationTrackerPage() {
       {/* Today's Log */}
       <section className="lg:col-span-2">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl sm:text-2xl font-semibold">Today's Log</h2>
+          <h2 className="text-xl sm:text-2xl font-semibold">Today&apos;s Log</h2>
           <Button variant="link" className="pr-0" onClick={() => setIsViewAllLogsModalOpen(true)}>View All</Button>
         </div>
         <Card>

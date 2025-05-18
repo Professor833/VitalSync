@@ -173,7 +173,7 @@ const SleepTrackerPage = () => {
           <Card className="lg:col-span-1"> 
             <CardHeader>
               <CardTitle>Sleep Stages</CardTitle>
-              <CardDescription>Last Night's Breakdown</CardDescription> 
+              <CardDescription>Last Night&apos;s Breakdown</CardDescription> 
             </CardHeader>
             <CardContent>
               {sleepStagesData.length > 0 ? (

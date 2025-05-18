@@ -113,7 +113,7 @@ export default function LandingPage() {
                 hackathon deadline for submission.
               </p>
               <p className="text-slate-300 max-w-3xl mx-auto">
-                In today's world, many of us use a variety of health and fitness
+                In today&apos;s world, many of us use a variety of health and fitness
                 wearables from different providers. VitalSync addresses the
                 growing need for a centralized platform where you can
                 consolidate, view, and analyze all your health data in one

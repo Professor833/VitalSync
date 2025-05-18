@@ -115,7 +115,7 @@ const NotificationSettingsSection = React.forwardRef<HTMLDivElement>((props, ref
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Notification Schedule</h3>
           <p className="text-sm text-muted-foreground">
-            Set quiet hours when you don't want to receive notifications
+            Set quiet hours when you don&apos;t want to receive notifications
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">

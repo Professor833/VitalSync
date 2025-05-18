@@ -87,7 +87,7 @@ export default function DashboardPage() {
             Dashboard
           </h1>
           <p className="text-muted-foreground">
-            Welcome back! Here's your health overview for today.
+            Welcome back! Here&apos;s your health overview for today.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -234,7 +234,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Today's Reminders</h3>
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Today&apos;s Reminders</h3>
               <ul className="space-y-3">
                 {reminders.map((reminder) => (
                   <li key={reminder.id} className="flex items-center justify-between p-3 border rounded-md hover:bg-muted/50 transition-colors">

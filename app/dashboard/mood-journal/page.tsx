@@ -100,7 +100,7 @@ export default function MoodJournalPage() {
             <div className="md:col-span-2 lg:col-span-3 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Card>
                 <CardHeader className="pb-2">
-                  <CardDescription className="text-sm font-medium">Today's Mood</CardDescription>
+                  <CardDescription className="text-sm font-medium">Today&apos;s Mood</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className={`text-2xl font-bold ${todaysMood === 'Great' || todaysMood === 'Good' ? 'text-green-600' : todaysMood === 'Bad' || todaysMood === 'Awful' ? 'text-red-600' : 'text-sky-600'}`}>{todaysMood}</p>

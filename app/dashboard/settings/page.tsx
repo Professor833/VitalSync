@@ -56,12 +56,14 @@ export default function SettingsPage() {
     };
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    Object.values(sectionRefs.current).forEach(ref => {
+    const currentSectionRefs = sectionRefs.current; // Capture current value
+
+    Object.values(currentSectionRefs).forEach(ref => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      Object.values(sectionRefs.current).forEach(ref => {
+      Object.values(currentSectionRefs).forEach(ref => { // Use captured value
         if (ref) observer.unobserve(ref);
       });
     };

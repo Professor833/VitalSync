@@ -104,7 +104,7 @@ const HealthScoreSection = () => {
             </ResponsiveContainer>
           </div>
           <p className="text-center text-muted-foreground mt-4">
-            Your health score is in the "Good" range.
+            Your health score is in the &quot;Good&quot; range.
           </p>
         </Card>
       </div>
