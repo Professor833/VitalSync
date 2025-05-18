@@ -5,7 +5,7 @@ VitalSync is a modern, user-friendly web application designed to help you monito
 ## Features
 
 * **Dynamic Landing Page:**
-  * **Interactive Particle Background:** A visually appealing background using `react-tsparticles` that subtly animates and reacts to mouse movement.
+  * **Interactive Particle Background:** A visually appealing background using `react-tsparticles` that subtly animates and reacts to mouse movement. `The goal behind this was to convey the interconnectedness of the health data and the health metrics which you get using this app.`
   * **Engaging Hero Section:** Clear value proposition with an animated gradient title and direct calls to action.
   * **"Why VitalSync?" Section:** Highlights core benefits using feature cards.
   * **"A Note on VitalSync":** Provides context on the project's vision for consolidating data from multiple wearables and clarifies the current status of dashboard data (see below).
